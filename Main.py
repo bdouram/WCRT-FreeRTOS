@@ -2,7 +2,8 @@ import os
 from math import ceil
 from Jobs import jobs
 
-L = 12 * (1 / 84000000)
+L = 0.000000142
+
 pseudo_task = 0.000005907
 
 def Interrupt(interrupt):
@@ -20,6 +21,7 @@ def Interrupt(interrupt):
     iteration = 0
 
     member_eq = L + interrupt["data"]["C"]
+    it = []
 
     while(Wi_1 != Wi) and (Wi_1 < interrupt["data"]["T"]):
         Wi = Wi_1
@@ -29,15 +31,20 @@ def Interrupt(interrupt):
             aux = aux + ceil_operation
         Wi_1 = member_eq + aux
         iteration = iteration + 1
+        it.append(Wi_1)
     if(Wi_1 < interrupt["data"]["T"]):
         R = interrupt["data"]["J"] + Wi
-        print("R[" + str(interrupt["name"]) + "] = " + str(R))
-        print("     Loops: " + str(iteration))
+        print("R[" + str(interrupt["name"]) + "] = " + str(R) + " seconds")
         for job in high_prio:
-            print("     Interference by: " + job["name"])       
+            print("     Interference by: " + job["name"])
+        print("     Loops: " + str(iteration))  
+        if len(it) > 0:
+            print("          -- W values --")
+            for i in it:
+                print("           " +  str(i))
     else:
-        print("R[" + str(interrupt["name"]) + "] =  LOST DEADLINE")
-
+        print("R[" + str(interrupt["name"]) + "] =  MISS DEADLINE")
+    print("\n") 
 
 def Task(task):
 
@@ -53,10 +60,11 @@ def Task(task):
     aux = 0
     ceil_operation = 0
     iteration = 0
+    it = []
 
-    member_eq = task["context_switch"]["idle"]
-    member_eq = member_eq + (pseudo_task * len(high_prio))
-    member_eq  = member_eq + (L + task["data"]["C"])
+    member_eq = L + task["context_switch"]["idle"]
+    member_eq = member_eq + (pseudo_task * sum(job["type"] == "Task" for job in jobs))
+    member_eq  = member_eq +  task["data"]["C"]
     member_eq = member_eq + 2 * (task["data"]["b_in"]) + task["data"]["B"] + task["data"]["b_out"]
     member_eq = member_eq + task["data"]["w"]
     
@@ -71,15 +79,20 @@ def Task(task):
             aux = aux + ceil_operation
         Wi_1 = member_eq + aux
         iteration = iteration + 1
-    
+        it.append(Wi_1)
     if(Wi_1 < task["data"]["T"]):
         R = task["data"]["J"] + Wi
-        print("R[" + str(task["name"]) + "] = " + str(R))
-        print("     Loops: " + str(iteration))
+        print("R[" + str(task["name"]) + "] = " + str(R) + " seconds")
         for job in high_prio:
-            print("     Interference by: " + job["name"])       
+            print("     Interference by: " + job["name"])
+        print("     Loops: " + str(iteration))      
+        if len(it) > 0:
+            print("          -- W values --")
+            for i in it:
+                print("           " +  str(i))
     else:
-        print("R[" + str(interrupt["name"]) + "] =  LOST DEADLINE")
+        print("R[" + str(interrupt["name"]) + "] =  MISS DEADLINE")
+    print("\n")
 
 def WCRT(list):
     index = 0

@@ -1,36 +1,48 @@
-#theta_1_first = {
-#    "name":"theta_1",
-#    "type":"Interrupt",
-#    "priority":3,
-#    "data":{
-#        "J":0.0000015, "C":0.00133, "B":0, "T":0.005,
-#    }
-#}
+theta_1_first = {
+    "name":"theta_1",
+    "type":"Interrupt",
+    "priority":3,
+    "data":{
+        "J":0.0000015, 
+        "C":0.00133, 
+        "B":0, 
+        "T":0.005,
+    }
+}
 
-#theta_2_first = {
-#    "name":"theta_2",
-#    "type":"Interrupt",
-#    "priority":2,
-#    "data":{
-#        "J":0.0000015, "C":0.003, "B":0, "T":0.015,
-#    }
-#}
+theta_2_first = {
+    "name":"theta_2",
+    "type":"Interrupt",
+    "priority":2,
+    "data":{
+        "J":0.0000015, 
+        "C":0.003, 
+        "B":0, 
+        "T":0.015,
+    }
+}
 
-#theta_3_first = {
-#    "name":"theta_3",
-#    "type":"Interrupt",
-#    "priority":1,
-#    "data":{
-#        "J":0.0000015, "C":0.00534, "B":0, "T":0.03,
-#    }
-#}
+theta_3_first = {
+    "name":"theta_3",
+    "type":"Interrupt",
+    "priority":1,
+    "data":{
+        "J":0.0000015,
+        "C":0.00534,
+        "B":0, 
+        "T":0.03,
+    }
+}
 
 theta_1 = {
     "name":"theta_1",
     "type":"Interrupt",
     "priority":3,
     "data":{
-        "J":0, "C":0.00003825, "B":0, "T":0.02,
+        "J":0, 
+        "C":0.00003825, 
+        "B":0, 
+        "T":0.02,
     }
 }
 
@@ -39,7 +51,10 @@ theta_2 = {
     "type":"Interrupt",
     "priority":2,
     "data":{
-        "J":0, "C":0.00007638, "B":0, "T":0.015,
+        "J":0, 
+        "C":0.00007638, 
+        "B":0, 
+        "T":0.015,
     }
 }
 
@@ -48,28 +63,31 @@ tick = {
     "type":"Interrupt",
     "priority":1,
     "data":{
-        "J":0, "C":0.000001357, "B":0, "T":0.001,
+        "J":0, 
+        "C":0.000001357, 
+        "B":0, 
+        "T":0.001,
     }
 }
 
 gamma_1 = {
-    "name": "gamma_1",
-    "type":"Task",
-    "priority": 6,
+    "name": "gamma_1", # Task Name
+    "type":"Task", # Is the job a Task or Interrupt?
+    "priority": 6, # Task Priority
     "data":{
-        "J": 0, 
-        "C": 0.000606375, 
-        "B": 0, 
-        "T":0.02,
-        "b_in": 0,
-        "b_out": 0,
-        "w": 0
+        "J": 0, # release jitter
+        "C": 0.000606375, # execution time
+        "B": 0, #block time
+        "T":0.02, # period
+        "b_in": 0, # context switch time for low priority task (if block occurs)
+        "b_out": 0,# context switch time from low priority task (if block occurs)
+        "w": 0 # context_switch time for high priority task (if block imposed)
     },
     "context_switch":{
-        "idle":0.000004733,
-        "gamma_2":0.00000363,
-        "gamma_3":0.00000363,
-        "gamma_4":0.000006,
+        "idle":0.000004733,  # context switch time from idle task to gamma 1.
+        "gamma_2":0.00000363, # context switch time for gamma 2
+        "gamma_3":0.00000363, # context switch time for gamma 3
+        "gamma_4":0.000006, # context switch time for gamma 4
     }
 }
 
