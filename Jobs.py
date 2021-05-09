@@ -64,7 +64,7 @@ tick = {
     "priority":1,
     "data":{
         "J":0, 
-        "C":0.000001357, 
+        "C":1.5e-6, 
         "B":0, 
         "T":0.001,
     }
@@ -75,19 +75,19 @@ gamma_1 = {
     "type":"Task", # Is the job a Task or Interrupt?
     "priority": 6, # Task Priority
     "data":{
-        "J": 0, # release jitter
-        "C": 0.000606375, # execution time
+        "J": 2.6e-6, # release jitter
+        "C": 606.375e-6, # execution time
         "B": 0, #block time
-        "T":0.02, # period
+        "T":20e-3, # period
         "b_in": 0, # context switch time for low priority task (if block occurs)
         "b_out": 0,# context switch time from low priority task (if block occurs)
         "w": 0 # context_switch time for high priority task (if block imposed)
     },
     "context_switch":{
-        "idle":0.000004733,  # context switch time from idle task to gamma 1.
-        "gamma_2":0.00000363, # context switch time for gamma 2
-        "gamma_3":0.00000363, # context switch time for gamma 3
-        "gamma_4":0.000006, # context switch time for gamma 4
+        "idle": 4.733e-6,  # context switch time from idle task to gamma 1.
+        "gamma_2":3.63e-6, # context switch time for gamma 2
+        "gamma_3":3.63e-6, # context switch time for gamma 3
+        "gamma_4":6e-6, # context switch time for gamma 4
     }
 }
 
@@ -96,7 +96,7 @@ gamma_2 = {
     "type":"Task",
     "priority": 5,
     "data":{
-        "J": 0, 
+        "J": 0.0000026, 
         "C": 0.00321, 
         "B": 0.008308, 
         "T":0.022,
@@ -117,19 +117,19 @@ gamma_3 = {
     "type":"Task",
     "priority": 4,
     "data":{
-        "J": 0,
+        "J": 0.0000026,
         "C": 0.00922,
         "B": 0,
         "T":0.021,
         "b_in": 0,
         "b_out": 0,
-        "w": 0.000003092
+        "w": 5.598e-6
     },
     "context_switch":{
-        "idle":0.000006253,
-        "gamma_1":0.0000025,
-        "gamma_2":0.000003092,
-        "gamma_4":0.000004372,
+        "idle":6.253e-6,
+        "gamma_1":2.5e-6,
+        "gamma_2":3.092e-6,
+        "gamma_4":4.372e-6,
     }
 }
 
@@ -138,19 +138,19 @@ gamma_4 = {
     "type":"Task",
     "priority": 3,
     "data":{
-        "J": 0,
-        "C": 0.001288,
+        "J": 2.6e-6,
+        "C": 1.288e-3,
         "B": 0,
-        "T":0.3,
+        "T": 30e-3,
         "b_in": 0,
         "b_out": 0,
         "w": 0
     },
     "context_switch":{
-        "idle":0.0000065,
-        "gamma_1":0.00000515,
-        "gamma_2":0.000006,
-        "gamma_3":0.000006,
+        "idle":6.5e-6,
+        "gamma_1":5.15e-6,
+        "gamma_2":6e-6,
+        "gamma_3":6e-6,
     }
 }
 

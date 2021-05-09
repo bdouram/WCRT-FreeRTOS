@@ -2,9 +2,10 @@ import os
 from math import ceil
 from Jobs import jobs
 
-L = 0.000000142
+#L = 0.000000142
+L = 142e-9
 
-pseudo_task = 0.000005907
+pseudo_task = 0.0000059
 
 def Interrupt(interrupt):
     high_prio = []
@@ -72,10 +73,12 @@ def Task(task):
         Wi = Wi_1
         aux = 0
         for job in high_prio:
-            if job["type"] == "Interrupt":
+            if job["type"] == "Interrupt" and job["name"]!="tick":
                 ceil_operation = ceil((Wi_1 + job["data"]["J"]) / job["data"]["T"]) * (L + job["data"]["C"]) 
             elif job["type"] == "Task":
                 ceil_operation = ceil((Wi_1 + job["data"]["J"]) / job["data"]["T"]) * (L + task["context_switch"][job["name"]]) + job["data"]["C"] + (L + job["context_switch"][task["name"]])
+            elif job["name"] == "tick":
+                 ceil_operation = ceil((Wi_1 + job["data"]["J"]) / job["data"]["T"]) * (job["data"]["C"]) 
             aux = aux + ceil_operation
         Wi_1 = member_eq + aux
         iteration = iteration + 1
